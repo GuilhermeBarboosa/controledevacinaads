@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Pesquisar Pessoa</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+			<h2>Pesquisar</h2>
+			<form th:action="@{/aplicacoes/pesquisarpessoa}" method="get">
+				
+				<div th:replace="~{pessoa/pesquisar :: campospesquisarpessoa}"></div>
+				
+			</form>
+		</main>
+	</div>
+</body>
+</html>

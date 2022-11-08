@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Página Principal</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+			<h2>Cadastrar Aplicação</h2>
+			<div class="container-fluid">
+
+				<form th:action="@{/aplicacoes/abrirescolherpessoa}" method="get">
+					<button type="submit" class="btn btn-primary mt-3">Escolher Pessoa</button>
+				</form>
+				<div th:if="${session.aplicacao?.pessoa != null}" class="mt-3">
+					<label th:text="'Pessoa: ' + ${session.aplicacao.pessoa.nome}"></label>
+				</div>
+
+				<form th:action="@{/aplicacoes/abrirescolherlote}" method="get">
+					<button type="submit" class="btn btn-primary mt-3">Escolher Lote</button>
+				</form>
+				<div th:if="${session.aplicacao?.lote != null}" class="mt-3">
+					<label th:text="'Nro Doses Atual do Lote: ' + ${session.aplicacao.lote.nroDosesAtual}"></label><br>
+					<label th:text="'Validade do Lote: ' + ${#temporals.format(session.aplicacao.lote.validade, 'dd/MM/yyyy')}"></label><br>
+					<label th:text="'Nome da Vacina do Lote: ' + ${session.aplicacao.lote.vacina.nome}"></label>
+				</div>
+
+				<form th:action="@{/aplicacoes/efetuarcadastro}" method="get">
+					<button type="submit" class="btn btn-primary mt-3"
+					        th:disabled="${session.aplicacao?.pessoa == null} or ${session.aplicacao?.lote == null}">Cadastrar Aplicação</button>
+				</form>
+
+			</div>
+		</main>
+		<!-- !conteudo principal -->
+
+	</div>
+
+	<!-- Nao usamos
+	<th:block layout:fragment="scripts">
+		<script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+	</th:block> -->
+
+</body>
+</html>

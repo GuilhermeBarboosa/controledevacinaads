@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Pessoas</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'codigo', 'Código', '')}"></div>
+						<div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'nome', 'Nome', '')}"></div>
+						<div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'cpf', 'CPF', '')}"></div>
+						<th scope="col">Data Nascimento</th>
+						<th scope="col">Profissão</th>
+						<th scope="col">Escolha</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p : ${pagina.conteudo}">
+						<td th:text="${p.codigo}"></td>
+						<td th:text="${p.nome}"></td>
+						<td th:text="${p.cpf}"></td>
+						<td th:text="${p.dataNascimento}"></td>
+						<td th:text="${p.profissao.nome}"></td>
+						<td>
+							<form th:action="@{/aplicacoes/escolherpessoa}" method="post">
+								<input type="hidden" name="codigo" th:value="${p.codigo}">
+								<input type="hidden" name="nome" th:value="${p.nome}">
+								<input type="hidden" name="cpf" th:value="${p.cpf}">
+								<input type="hidden" name="dataNascimento" th:value="${#temporals.format(p.dataNascimento, 'dd/MM/yyyy')}">
+								<input type="hidden" name="profissao.codigo" th:value="${p.profissao.codigo}">
+								<input type="hidden" name="profissao.nome" th:value="${p.profissao.nome}">
+								<button type="submit" class="btn btn-secondary">Escolher
+								</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+		</main>
+	</div>
+</body>
+</html>

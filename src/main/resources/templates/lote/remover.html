@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Remover Lote</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+			<h1>Remover</h1>
+			<h2>Você tem certeza que quer remover o Lote:</h2>
+			<div class="mb-3">
+				<label class="form-label">
+					Código:
+					<span th:text="${lote.codigo}"></span>
+				</label>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">
+					Validade:
+					<span th:text="${lote.validade}"></span>
+				</label>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">
+					Número de Doses do Lote:
+					<span th:text="${lote.nroDosesDoLote}"></span>
+				</label>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">
+					Número de Doses Atual:
+					<span th:text="${lote.nroDosesAtual}"></span>
+				</label>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">
+					Vacina:
+					<span th:text="${lote.vacina.nome}"></span>
+				</label>
+			</div>
+			<form th:action="@{/lotes/remover}" method="post">
+				<input type="hidden" name="codigo" th:value="${lote.codigo}">
+				<input type="hidden" name="validade" th:value="${#temporals.format(lote.validade, 'dd/MM/yyyy')}">
+				<input type="hidden" name="nroDosesDoLote" th:value="${lote.nroDosesDoLote}">
+				<input type="hidden" name="nroDosesAtual" th:value="${lote.nroDosesAtual}">
+				<input type="hidden" name="vacina.codigo" th:value="${lote.vacina.codigo}">
+				<input type="hidden" name="vacina.nome" th:value="${lote.vacina.nome}">
+				<input type="hidden" name="vacina.descricao" th:value="${lote.vacina.descricao}">
+				<button type="submit" class="btn btn-danger">Remover</button>
+			</form>
+		</main>
+	</div>
+</body>
+</html>
