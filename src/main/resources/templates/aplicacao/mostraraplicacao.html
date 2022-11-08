@@ -19,6 +19,8 @@
 						<th scope="col">Lote</th>
 						<th scope="col">Vacina</th>
 						<th scope="col">Pessoa</th>
+							<th scope="col">Alterar</th>
+						<th scope="col">Remover</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,6 +30,27 @@
 						<td th:text="${p.lote.codigo}"></td>
 						<td th:text="${p.lote.vacina.nome}"></td>
 						<td th:text="${p.pessoa.nome}"></td>
+						<td>
+							<form th:action="@{/aplicacoes/abriralterar}" method="post">
+								<input type="hidden" name="codigo" th:value="${p.codigo}">
+								<input type="hidden" name="data" th:value="${{p.data}}">
+								<input type="hidden" name="lote" th:value="${p.nroDosesDoLote}">
+								<button type="submit" title="Editar" class="btn btn-secondary">
+									<i class="bi bi-pencil-fill"></i>
+								</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{/aplicacoes/abrirremover}" method="post">
+								<input type="hidden" name="codigo" th:value="${p.codigo}">
+								<input type="hidden" name="data" th:value="${{p.data}}">
+								<input type="hidden" name="lote" th:value="${p.nroDosesDoLote}">
+								<button type="submit" title="Editar" class="btn btn-secondary">
+								<button type="submit" title="Remover" class="btn btn-danger">
+									<i class="bi bi-trash-fill"> </i>
+								</button>
+							</form>
+						</td>
 					</tr>
 				</tbody>
 			</table>
