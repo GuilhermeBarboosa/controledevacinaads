@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39f6cdd5-77d6-41b6-a6c4-a8028c2c427b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT lote.codigo,
+	pessoa.nome,
+	aplicacao.codigo,
+	profissao.nome,
+	vacina.nome
+FROM aplicacao,
+	lote,
+	pessoa,
+	profissao,
+	vacina
+WHERE 
+	 pessoa.codigo_profissao = profissao.codigo 
+	 AND aplicacao.codigo_lote = lote.codigo
+	 AND aplicacao.codigo_pessoa = pessoa.codigo
+	 AND lote.codigo_vacina = vacina.codigo]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="lote"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="COLUMN_3" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="aplicacao"/>
+	</field>
+	<field name="COLUMN_4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="profissao"/>
+	</field>
+	<field name="COLUMN_5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacina"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="177" y="24" width="200" height="30" uuid="022ba8c0-80a5-4927-8699-a5e288536c8c"/>
+				<textElement>
+					<font fontName="aakar" size="24"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Vacina]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="191" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="120" height="20" uuid="a057690f-fc77-44a0-a5c2-127d03acd3eb"/>
+				<text><![CDATA[Pessoa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="30" uuid="34690a16-a0bd-4ae8-86bc-7d6524876aed"/>
+				<text><![CDATA[Profissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="100" height="30" uuid="5fd9c55b-b50a-42dc-ae9c-2f6c781af645"/>
+				<text><![CDATA[Vacina:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="30" uuid="ba9c385f-aee1-43c2-a762-7b1955191c21"/>
+				<text><![CDATA[Lote:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="10" width="100" height="20" uuid="30a774dc-8306-4d70-b341-d3cf8a2e6ac5"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="40" width="100" height="30" uuid="282d164d-0e7a-4509-aeb2-cfaa430b9a26"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="70" width="100" height="30" uuid="0b08dc99-a2a2-4720-9403-1ff1536c512e"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="100" width="100" height="30" uuid="4fb02d45-2e01-4107-8241-1ed46ce8f710"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="160" width="100" height="30" uuid="a1ad405b-fd9a-4313-9fce-b7b36f3019c7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="460" y="160" width="100" height="30" uuid="fed04005-4217-48bd-82be-a6c2a148d7de"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
